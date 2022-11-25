@@ -7,7 +7,7 @@ const Anuncios = ({navigation}) => {
     <View>
     <Text> pestaña 2</Text>
     <Button title='ir a pestaña 1'
-    onPress={(()=>navigation.navigate('Home'))}/>
+    onPress={(()=>navigation.navigate('Form'))}/>
     <StatusBar style="auto" />
   </View>
   )

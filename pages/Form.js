@@ -6,8 +6,8 @@ import { TextInput } from "react-native-web";
 
 const Formulario = ({navigation}) => {
   const [datos2, setDatos] = useState([]);
-  const [usuario, setUsuario] = useState(null);
-  const [password, setPassword] = useState(null);
+  const [usuario, setUsuario] = useState("");
+  const [password, setPassword] = useState("");
   const [state, setstate] = useState(false);
 
   /* ------------------------------ */
@@ -39,10 +39,10 @@ const Formulario = ({navigation}) => {
   const validar = () => {
     if (usuario.length == "" || password.length == "") {
       if (usuario.length == "") {
-        alert("falta el usuario");
+      //  alert("falta el usuario");
       }
       if (password.length == "") {
-        alert("falta el password");
+      //  alert("falta el password");
       }
 
       return false;
@@ -53,11 +53,11 @@ const Formulario = ({navigation}) => {
     );
 
     if (!searchUsuario) {
-      alert("usuario no encontrado");
+    //  alert("usuario no encontrado");
       return false;
     }
     if (!searchApellido) {
-      alert("apellido no encontrado");
+    //  alert("apellido no encontrado");
       return false;
     }
     return true;
@@ -65,15 +65,21 @@ const Formulario = ({navigation}) => {
 
   const nuevaPagina = () => {
     if (!validar()) {
-      alert("no valido");
+     // alert("no valido");
       setTimeout(() => {
         ()=>navigation.navigate('Anuncios')
       }, 1000);
+      setstate(false)
       return false
     }
     alert("validado");
     setstate(true)
+    return true
   };
+
+  useEffect(() => {
+    nuevaPagina()
+  }, [usuario, password]);
 
   return (
     <View>
@@ -97,11 +103,16 @@ const Formulario = ({navigation}) => {
               />
             </Stack>
             <Box alignItems="center">
-              {/*  <Button onPress={() => nuevaPagina()}>enviar</Button> */}
-              <Button
+
+              {state ? (<Button
                 title="ir a pestaña 1"
                 onPress={ ()=>navigation.navigate('Anuncios')}
-              />
+              />) : null}
+
+              {/* <Button
+                title="ir a pestaña 1"
+                onPress={ ()=>navigation.navigate('Anuncios')}
+              /> */}
             </Box>
           </FormControl>
         </Box>
